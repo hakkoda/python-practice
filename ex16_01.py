@@ -1,0 +1,6 @@
+filename = input("Enter file to be read: ")
+fHandle = open(filename)
+contents = fHandle.read()
+print(f"Here's the contents of {filename}")
+print(contents)
+fHandle.close()
