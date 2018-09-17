@@ -1,0 +1,34 @@
+A good exercise would be to do the following:
+1) Get user input to get a filename (argv or input) for input/output
+2) Get user input to write to a file
+3) Read in the contents of the file
+4) Display the contents of the file to screen
+5) Display the contents of the file again, one line at a time
+6) Encapsulate functionality in function calls
+
+
+from sys import argv
+script, first, second, third = argv
+
+
+likes = input(prompt)
+
+
+txt = open(filename)
+contents = txt.read()
+txt.close()
+
+
+target = open(filename, 'w')
+target.truncate()
+target.write(line1)
+target.close()
+
+
+from os.path import exists
+isFile = exists(filename)
+
+readline
+seek
+
+functions
