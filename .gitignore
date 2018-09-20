@@ -1,3 +1,4 @@
 random-thoughts.txt
 *.swp
+__pycache__
 test.txt
