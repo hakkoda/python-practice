@@ -2,3 +2,5 @@ random-thoughts.txt
 *.swp
 __pycache__
 test.txt
+temp.py
+temp
