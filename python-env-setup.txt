@@ -1,0 +1,22 @@
+# Not sure which of the following works on Ubuntu to install virtualenv.
+# I think the top one is the correct command.
+sudo apt install virtualenv
+python3.6 -m pip install virtualenv
+
+# A place to store my virtual environments.
+mkdir ~/.venvs
+
+# Run virtualenv and tell it to include the system site packages and then build
+# the virtualenv in ~/.venvs/lpthw.
+virtualenv --python=python3.6 --system-site-packages ~/.venvs/lpthw
+
+# This will "source" the lpthw virtual environment.
+. ~/.venvs/lpthw/bin/activate
+
+# Should see python3.6 as the default python version
+which python
+python
+
+
+# If you wish to go back to the regular python environment, just deactivate
+deactivate
