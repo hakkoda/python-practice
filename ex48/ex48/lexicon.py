@@ -1,64 +1,48 @@
-DIRECTION_WORDS = [
-    "north",
-    "south",
-    "east",
-    "west",
-    "up",
-    "down",
-    "left",
-    "right",
-    "back"
-]
-
-VERBS = [ "go", "stop", "kill", "eat" ]
-STOP_WORDS = [ "the", "in", "of", "from", "at", "it" ]
-NOUNS = [ "door", "bear", "princess", "cabinet" ]
+LEGAL_WORDS_DICT = {
+    "direction": [
+        "north",
+        "south",
+        "east",
+        "west",
+        "up",
+        "down",
+        "left",
+        "right",
+        "back"
+    ],
+    "verb": [ "go", "stop", "kill", "eat" ],
+    "stop": [ "the", "in", "of", "from", "at", "it" ],
+    "noun": [ "door", "bear", "princess", "cabinet" ],
+}
 
 def scan(text):
     result = []
 
-    scanned_directions = scan_words(text, DIRECTION_WORDS, "direction")
-    result = result + scanned_directions
+    for token in text.split():
+        match = parse_token(token)
+        if match != None:
+            result.append(match)
+            continue
 
-    scanned_verbs = scan_words(text, VERBS, "verb")
-    result = result + scanned_verbs
-
-    scanned_stops = scan_words(text, STOP_WORDS, "stop")
-    result = result + scanned_stops
-
-    scanned_nouns = scan_words(text, NOUNS, "noun")
-    result = result + scanned_nouns
-
-    scanned_numbers = scan_numbers(text)
-    result = result + scanned_numbers
-
-    return result
-
-def scan_words(text, word_list, target):
-    result = []
-
-    tokens = text.split()
-    for token in tokens:
-        for word in word_list:
-            if token == word:
-                result.append((target, token))
-                break
-
-    return result
-
-def scan_numbers(text):
-    result = []
-
-    tokens = text.split()
-    for token in tokens:
         num = convert_number(token)
         if num != None:
-            result.append(("number", num))
+            result.append(num)
+            continue
+
+        result.append(("error", token))
 
     return result
+
+def parse_token(token):
+    for category, word_list in LEGAL_WORDS_DICT.items():
+        for word in word_list:
+            if token == word:
+                return (category, token)
+
+    return None
 
 def convert_number(text):
     try:
-        return int(text)
+        return ("number", int(text))
     except ValueError:
         return None

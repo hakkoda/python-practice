@@ -21,6 +21,13 @@ def is_prime(num):
     return True
 
 def is_perfect_square(num):
+    for x in range(2, num):
+        square = x * x
+        if square == num:
+            return True
+        elif square > num:
+            return False
+
     return False
 
 num = 0
