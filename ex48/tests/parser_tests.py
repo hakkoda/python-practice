@@ -1,6 +1,6 @@
 from nose.tools import *
 from ex48 import lexicon
-from ex48 import parser
+#from ex48 import parser
 
 def test_get_subject():
     assert_equal(lexicon.scan("north"), [("direction", "north")])
