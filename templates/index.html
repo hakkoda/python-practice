@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gothons of Planet Percal #25</title>
-    <style>
-        em { color: green; font-size: 2em; }
-    </style>
-</head>
-<body>
-    {% if greeting %}
-        I just wanted to say <em>{{ greeting }}</em>
-    {% else %}
-        <em>Hello</em>, world!
-    {% endif %}
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if greeting %}
+    I just wanted to say <em>{{ greeting }}</em>
+{% else %}
+    <em>Hello</em>, world!
+{% endif %}
+
+<br>
+<a href="/hello">BACK TO FORM</a>
+
+{% endblock %}
