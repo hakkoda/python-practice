@@ -20,9 +20,15 @@ class HelloActions(cocos.layer.ColorLayer):
         sprite.do(Repeat(Reverse(scale) + scale))
 
 
+# Init the director
 cocos.director.director.init()
+
+# Create the layer
 hello_layer = HelloActions()
 hello_layer.do(RotateBy(360, duration=10))
 
+# Create a scene with our layer
 main_scene = cocos.scene.Scene(hello_layer)
+
+# Have the director run the scene
 cocos.director.director.run(main_scene)
