@@ -1,0 +1,1 @@
+LinkedList stuff, Python style

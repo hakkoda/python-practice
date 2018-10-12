@@ -11,3 +11,15 @@ class RangeCheck(object):
                 result = index
 
         return result;
+
+    def sort_asc(self, num_list):
+        result = num_list
+
+        list_len = len(result)
+        for x_index in range(0, list_len):
+            smallest_index = self.run(x_index, list_len, result)
+            smallest = result[smallest_index]
+            result[smallest_index] = result[x_index]
+            result[x_index] = smallest
+
+        return result
