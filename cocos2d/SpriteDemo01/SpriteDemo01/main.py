@@ -7,7 +7,7 @@ class SpriteDemo01(cocos.layer.ColorLayer):
         sprite1 = cocos.sprite.Sprite("img/invaders.png")
         sprite1.position = 320, 240
         #sprite.position = 16, 12
-        sprite1.scale = 2
+        sprite1.scale = 4
         sprite1.do(Repeat(RotateBy(360, duration=2)))
         self.add(sprite1)
 
