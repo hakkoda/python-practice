@@ -1,3 +1,4 @@
+import pyglet
 import cocos
 from cocos.actions import *
 
@@ -11,10 +12,58 @@ class SpriteDemo01(cocos.layer.ColorLayer):
         sprite1.do(Repeat(RotateBy(360, duration=2)))
         self.add(sprite1)
 
-        sprite2 = cocos.sprite.Sprite("img/invaders.png")
-        sprite2.position = 32,24 
-        sprite2.scale = 2
-        self.add(sprite2)
+        self.sprite2 = cocos.sprite.Sprite("img/invaders.png")
+        self.sprite2.position = 32,24 
+        self.sprite2.scale = 2
+        self.sprite2.speed = 150
+        self.sprite2.velocity = 0, 0
+        self.add(self.sprite2)
+
+        # setup joysticks
+        joysticks = pyglet.input.get_joysticks()
+        if joysticks: 
+            self.joystick = joysticks[0]
+        self.joystick.on_joybutton_press = self.on_joybutton_press
+        self.joystick.on_joybutton_release = self.on_joybutton_release
+        self.joystick.on_joyaxis_motion = self.on_joyaxis_motion
+        self.joystick.open()
+
+        self.x_pressed = False
+        self.y_pressed = False
+        self.x_released = False
+        self.y_released = False
+
+        self.sprite2.do(Move())
+
+    def on_joybutton_press(self, joystick, button):
+        print("button pressed...")
+        print(f"button: {button}")
+        self.sprite2.speed = 300
+
+    def on_joybutton_release(self, joystick, button):
+        print("button released...")
+        print(f"button: {button}")
+        self.sprite2.speed = 150
+
+    def on_joyaxis_motion(self, joystick, axis, value):
+        if axis == "x":
+            if value == 1.0 or value == -1.0:
+                self.x_pressed = True
+                self.x_released = False
+                self.sprite2.velocity = value * self.sprite2.speed, 0
+            elif self.x_pressed:
+                self.x_released = True
+                self.x_pressed = False
+                self.sprite2.velocity = 0,0
+        elif axis == "y":
+            if value == 1.0 or value == -1.0:
+                self.y_pressed = True
+                self.y_released = False
+                self.sprite2.velocity = 0, -value * self.sprite2.speed
+            elif self.y_pressed:
+                self.y_released = True
+                self.y_pressed = False
+                self.sprite2.velocity = 0,0
 
 if __name__ == "__main__":
     cocos.director.director.init()

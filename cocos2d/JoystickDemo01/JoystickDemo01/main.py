@@ -31,6 +31,7 @@ if joysticks:
 joystick.on_joybutton_press = on_joybutton_press
 joystick.on_joyaxis_motion = on_joyaxis_motion
 
-win = pyglet.window.Window()
-joystick.open(window=win)
+#win = pyglet.window.Window()
+#joystick.open(window=win)
+joystick.open()
 pyglet.app.run()
