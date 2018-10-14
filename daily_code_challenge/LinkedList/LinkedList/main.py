@@ -31,7 +31,7 @@ class LinkedList(object):
         return last
 
     def insert(self, index, data):
-        if self.size() > index:
+        if self.size() >= index:  # TODO: changed to >= | does it still work???
             previous_node = self.top
             for x in range(0, index-1):
                 previous_node = previous_node.next_node
@@ -53,7 +53,54 @@ class LinkedList(object):
             node = node.next_node
         return result;
 
+    def remove(self, index):
+        result = None
 
+        if self.size() > index:
+            if index == 0:
+                result = self.top
+                self.top = self.top.next_node
+                result.next_node = None
+            else:
+                previous_node = self.top
+                for x in range(0, index-1):
+                    previous_node = previous_node.next_node
+
+                result = previous_node.next_node
+                previous_node.next_node = result.next_node
+                result.next_node = None
+
+        return result
+
+    def smallest(self):
+        result = None if self.top == None else 0
+
+        if result != None:
+            current_node = self.top
+            smallest_data = current_node.data
+            for x in range(0, self.size()):
+                if current_node.data < smallest_data:
+                    smallest_data = current_node.data
+                    result = x
+                current_node = current_node.next_node
+
+        return result
+
+    def sort_desc(self):
+        sorted_list = LinkedList()
+        for x in range(0, self.size()):
+            smallest_index = self.smallest()
+            smallest_node = self.remove(smallest_index)
+            sorted_list.insert(0, smallest_node.data)
+        self.top = sorted_list.top
+
+    def sort_asc(self):
+        sorted_list = LinkedList()
+        for x in range(0, self.size()):
+            smallest_index = self.smallest()
+            smallest_node = self.remove(smallest_index)
+            sorted_list.add(smallest_node.data)
+        self.top = sorted_list.top
 
 
 

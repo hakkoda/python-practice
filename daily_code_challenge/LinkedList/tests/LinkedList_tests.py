@@ -52,3 +52,82 @@ def test_insert_1():
     linked_list.insert(0, 1)    # insert value 1 into index 0
     list_array = linked_list.to_array()
     assert_equal([1,2], list_array)
+
+def test_remove():
+    linked_list = LinkedList()
+    linked_list.add(1)
+    linked_list.add(2)
+    linked_list.add(3)
+    removed = linked_list.remove(1)
+
+    assert_equal(removed.data, 2)
+    assert_equal(removed.next_node, None)
+
+    list_array = linked_list.to_array()
+    assert_equal([1,3], list_array)
+
+def test_remove_1():
+    linked_list = LinkedList()
+    linked_list.add(1)
+    removed = linked_list.remove(0)
+
+    assert_equal(removed.data, 1)
+    assert_equal(removed.next_node, None)
+
+    list_array = linked_list.to_array()
+    assert_equal([], list_array)
+
+def test_remove_2():
+    linked_list = LinkedList()
+    linked_list.add(1)
+    linked_list.add(2)
+    removed = linked_list.remove(0)
+
+    assert_equal(removed.data, 1)
+    assert_equal(removed.next_node, None)
+
+    list_array = linked_list.to_array()
+    assert_equal([2], list_array)
+
+def test_smallest():
+    linked_list = LinkedList()
+    linked_list.add(4)
+    linked_list.add(5)
+    linked_list.add(1)
+    linked_list.add(3)
+    linked_list.add(2)
+    smallest_index = linked_list.smallest()
+    assert_equal(smallest_index, 2)
+
+def test_smallest_none():
+    linked_list = LinkedList()
+    smallest_index = linked_list.smallest()
+    assert_equal(smallest_index, None)
+
+def test_smallest_1():
+    linked_list = LinkedList()
+    linked_list.add(1)
+    smallest_index = linked_list.smallest()
+    assert_equal(smallest_index, 0)
+
+def test_sort_desc():
+    linked_list = LinkedList()
+    linked_list.add(4)
+    linked_list.add(1)
+    linked_list.add(5)
+    linked_list.add(3)
+    linked_list.add(2)
+    linked_list.sort_desc()
+    list_array = linked_list.to_array()
+    assert_equal([5,4,3,2,1], list_array)
+
+def test_sort_desc():
+    linked_list = LinkedList()
+    linked_list.add(4)
+    linked_list.add(1)
+    linked_list.add(5)
+    linked_list.add(3)
+    linked_list.add(2)
+    linked_list.sort_asc()
+    list_array = linked_list.to_array()
+    assert_equal([1,2,3,4,5], list_array)
