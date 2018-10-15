@@ -86,6 +86,20 @@ class LinkedList(object):
 
         return result
 
+    def largest(self):
+        result = None if self.top == None else 0
+
+        if result != None:
+            current_node = self.top
+            largest_data = current_node.data
+            for x in range(0, self.size()):
+                if current_node.data > largest_data:
+                    largest_data = current_node.data
+                    result = x
+                current_node = current_node.next_node
+
+        return result
+
     def sort_desc(self):
         sorted_list = LinkedList()
         for x in range(0, self.size()):
@@ -102,13 +116,9 @@ class LinkedList(object):
             sorted_list.add(smallest_node.data)
         self.top = sorted_list.top
 
-
-
-if __name__ == "__main__":
-    linked_list = LinkedList()
-    linked_list.add(5)
-    linked_list.add(4)
-    linked_list.add(8)
-    linked_list.add(6)
-    print(f"{linked_list.to_array()}")
-
+    def reverse(self):
+        reversed_list = LinkedList()
+        for x in range(0, self.size()):
+            node = self.remove(0)
+            reversed_list.insert(0, node.data)
+        self.top = reversed_list.top

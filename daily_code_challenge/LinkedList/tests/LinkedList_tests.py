@@ -131,3 +131,35 @@ def test_sort_desc():
     linked_list.sort_asc()
     list_array = linked_list.to_array()
     assert_equal([1,2,3,4,5], list_array)
+
+def test_reverse():
+    linked_list = LinkedList()
+    linked_list.add(4)
+    linked_list.add(1)
+    linked_list.add(5)
+    linked_list.add(3)
+    linked_list.add(2)
+    linked_list.reverse()
+    list_array = linked_list.to_array()
+    assert_equal([2,3,5,1,4], list_array)
+
+def test_largest():
+    linked_list = LinkedList()
+    linked_list.add(4)
+    linked_list.add(5)
+    linked_list.add(1)
+    linked_list.add(3)
+    linked_list.add(2)
+    largest_index = linked_list.largest()
+    assert_equal(largest_index, 1)
+
+def test_largest_none():
+    linked_list = LinkedList()
+    largest_index = linked_list.largest()
+    assert_equal(largest_index, None)
+
+def test_largest_1():
+    linked_list = LinkedList()
+    linked_list.add(1)
+    largest_index = linked_list.largest()
+    assert_equal(largest_index, 0)
